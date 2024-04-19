@@ -1,7 +1,7 @@
 # configcraft/ui/__init__.py
 import streamlit as st
 from datetime import datetime
-from configcraft.model import get_ai_response
+from configcraft.generator import get_ai_response
 
 # Custom styles for the chat interface
 def load_css():
