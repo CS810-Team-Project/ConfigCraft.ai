@@ -12,7 +12,7 @@ poetry install
 ```
 Run:
 ```
-poetry run python main.py 
+poetry run streamlit run main.py
 ```
 ## Project Structure
 1. [main.py](main.py): The entry point of the project.
