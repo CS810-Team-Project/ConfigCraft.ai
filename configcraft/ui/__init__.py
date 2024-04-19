@@ -1,6 +1,7 @@
 # configcraft/ui/__init__.py
 import streamlit as st
 from datetime import datetime
+from configcraft.model import get_ai_response
 
 # Custom styles for the chat interface
 def load_css():
@@ -65,6 +66,4 @@ def run_app():
 
 def process_input(user_input):
     print(st.session_state.chat_history)
-
-    # Simple echo function for demonstration
-    return f"Processed: {user_input}"
+    return get_ai_response(user_input)
