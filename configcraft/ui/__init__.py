@@ -46,9 +46,15 @@ def run_app():
     if st.session_state.chat_history:
         for chat in st.session_state.chat_history:
             if chat['type'] == 'user':
-                st.markdown(f"<div class='chat-box message user-message'>You ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):<br>{chat['message']}</div>", unsafe_allow_html=True)
+                # st.markdown(f"<div class='chat-box message user-message'>You ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='chat-box message user-message'>{chat['message']}</div>", unsafe_allow_html=True)
             else:
-                st.markdown(f"<div class='chat-box message bot-message'>ConfigCraft.ai ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):<br>{chat['message']}</div>", unsafe_allow_html=True)
+                if chat['message'].startswith('#!'):
+                    # st.markdown(f"<div class='chat-box message bot-message'>ConfigCraft.ai ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):</div>", unsafe_allow_html=True)
+                    st.code(chat['message'], language='bash')
+                else:
+                    # st.markdown(f"<div class='chat-box message bot-message'>ConfigCraft.ai ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):</div>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='chat-box message bot-message'>{chat['message']}</div>", unsafe_allow_html=True)
 
     # Use a form for the chat input
     with st.form("chat_form", clear_on_submit=True):
