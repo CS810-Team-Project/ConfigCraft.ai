@@ -50,8 +50,7 @@ def run_app():
                 st.markdown(f"<div class='chat-box message bot-message'>ConfigCraft.ai ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):<br>{chat['message']}</div>", unsafe_allow_html=True)
 
     # Use a form for the chat input
-    with st.form("chat_form"):
-        # Chat interface with form
+    with st.form("chat_form", clear_on_submit=True):
         user_input = st.text_input("How can I help you?", key="user_input")
         submit_button = st.form_submit_button("Send")
 
@@ -59,13 +58,13 @@ def run_app():
     if submit_button and user_input:
         response = process_input(user_input)
 
-        # Append user input and response to the chat history
         st.session_state.chat_history.append({'type': 'user', 'message': user_input, 'timestamp': datetime.now()})
         st.session_state.chat_history.append({'type': 'bot', 'message': response, 'timestamp': datetime.now()})
 
-        # Rerender the page to update the chat history
         st.experimental_rerun()
 
 def process_input(user_input):
+    print(st.session_state.chat_history)
+
     # Simple echo function for demonstration
     return f"Processed: {user_input}"
