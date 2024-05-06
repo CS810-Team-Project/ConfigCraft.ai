@@ -50,26 +50,36 @@ def run_app():
                 st.markdown(f"<div class='chat-box message user-message'>{chat['message']}</div>", unsafe_allow_html=True)
             else:
                 if chat['message'].startswith('#!'):
+                    print('Code block 1')
+                    print(chat['message'])
                     # st.markdown(f"<div class='chat-box message bot-message'>ConfigCraft.ai ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):</div>", unsafe_allow_html=True)
                     st.code(chat['message'], language='bash')
+                elif chat['message'].startswith('```'):
+                    print('Code block 2')
+                    print(chat['message'])
+                    # st.markdown(f"<div class='chat-box message bot-message'>ConfigCraft.ai ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):</div>", unsafe_allow_html=True)
+                    st.code(chat['message'])
                 else:
+                    print('Text block:')
+                    print(chat['message'])
                     # st.markdown(f"<div class='chat-box message bot-message'>ConfigCraft.ai ({chat['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}):</div>", unsafe_allow_html=True)
                     st.markdown(f"<div class='chat-box message bot-message'>{chat['message']}</div>", unsafe_allow_html=True)
 
     # Use a form for the chat input
     with st.form("chat_form", clear_on_submit=True):
+        target = st.selectbox("Target", ["iptables", "soot", "(Not Specified)"])
         user_input = st.text_input("How can I help you?", key="user_input")
         submit_button = st.form_submit_button("Send")
 
     # On input submission, process the input and store it in chat history
     if submit_button and user_input:
-        response = process_input(user_input)
+        response = process_input(user_input, target)
 
         st.session_state.chat_history.append({'type': 'user', 'message': user_input, 'timestamp': datetime.now()})
         st.session_state.chat_history.append({'type': 'bot', 'message': response, 'timestamp': datetime.now()})
 
         st.experimental_rerun()
 
-def process_input(user_input):
+def process_input(user_input, target):
     print(st.session_state.chat_history)
-    return get_ai_response(user_input)
+    return get_ai_response(user_input, target)
