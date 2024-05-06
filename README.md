@@ -12,7 +12,7 @@ poetry install
 ```
 Run:
 ```
-poetry run python main.py 
+poetry run streamlit run main.py
 ```
 ## Project Structure
 1. [main.py](main.py): The entry point of the project.
@@ -30,3 +30,11 @@ Push to main branch is not allowed. Please create a new branch and submit a pull
 4. Make changes and commit.
 5. Push the branch to the remote repository.
 6. Create a pull request, set the reviewer and assignee.
+
+
+## References
+- [Building RAG from Scratch (Lower-Level)](https://docs.llamaindex.ai/en/stable/optimizing/building_rag_from_scratch/)
+    - [Building Data Ingestion from Scratch](https://docs.llamaindex.ai/en/stable/examples/low_level/ingestion/)
+    - [Vector Retrieval from Scratch](https://docs.llamaindex.ai/en/stable/examples/low_level/retrieval/)
+- [Building RAG from Scratch (Open-source only!)](https://docs.llamaindex.ai/en/stable/examples/low_level/oss_ingestion_retrieval/)
+- [Faiss Vector Store](https://docs.llamaindex.ai/en/stable/examples/vector_stores/FaissIndexDemo/)
