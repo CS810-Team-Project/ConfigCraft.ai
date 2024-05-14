@@ -3,15 +3,9 @@ from dotenv import load_dotenv
 import os
 from openai.types.chat import ChatCompletionSystemMessageParam, ChatCompletionUserMessageParam
 from llama_index.agent.openai import OpenAIAssistantAgent
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 # Load environment variables from .env file
 load_dotenv()
-
-def init_codellama():
-    global embed_model
-    # sentence transformers
-    embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en")
 
 llm = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 query_rewrite_agent = OpenAIAssistantAgent.from_existing(assistant_id="asst_4ul13DeDrQBJWcQgdQ8a2nKI")

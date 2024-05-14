@@ -68,19 +68,18 @@ def run_app():
     # Use a form for the chat input
     with st.form("chat_form", clear_on_submit=True):
         target = st.selectbox("Target", ["iptables", "soot", "(Not Specified)"])
-        model = st.selectbox("Model", ["OpenAI", "Codellama"])
         user_input = st.text_input("How can I help you?", key="user_input")
         submit_button = st.form_submit_button("Send")
 
     # On input submission, process the input and store it in chat history
     if submit_button and user_input:
-        response = process_input(user_input, target, model)
+        response = process_input(user_input, target)
 
         st.session_state.chat_history.append({'type': 'user', 'message': user_input, 'timestamp': datetime.now()})
         st.session_state.chat_history.append({'type': 'bot', 'message': response, 'timestamp': datetime.now()})
 
         st.experimental_rerun()
 
-def process_input(user_input, target, model):
+def process_input(user_input, target):
     print(st.session_state.chat_history)
-    return get_ai_response(user_input, target, model)
+    return get_ai_response(user_input, target)
